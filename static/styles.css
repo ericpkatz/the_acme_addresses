@@ -15,3 +15,7 @@ nav {
   display: flex;
   justify-content: space-around;
 }
+
+.addressInput {
+  width: 100%;
+}

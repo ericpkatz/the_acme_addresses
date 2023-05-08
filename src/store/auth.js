@@ -26,6 +26,18 @@ export const loginWithToken = ()=> {
   };
 };
 
+export const createAddress = (data)=> {
+  return async(dispatch)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.post('/api/auth/addresses', { data }, {
+      headers: {
+        authorization: token
+      }
+    });
+    dispatch(loginWithToken());
+  }
+};
+
 
 export const attemptLogin = (credentials)=> {
   return async(dispatch)=> {

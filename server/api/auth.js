@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express.Router();
-const { User } = require('../db');
+const { User, Address } = require('../db');
 const { isLoggedIn } = require('./middleware');
 
 module.exports = app;
@@ -18,6 +18,15 @@ app.post('/register', async(req, res, next)=> {
   try {
     const user = await User.create(req.body);
     res.send(user.generateToken());
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+app.post('/addresses', isLoggedIn, async(req, res, next)=> {
+  try {
+    res.send(await Address.create({...req.body, userId: req.user.id }));
   }
   catch(ex){
     next(ex);

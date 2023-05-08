@@ -1,5 +1,8 @@
 const conn = require('./conn');
 const User = require('./User');
+const Address = require('./Address');
+
+User.hasMany(Address);
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
@@ -23,4 +26,5 @@ const syncAndSeed = async()=> {
 module.exports = {
   syncAndSeed,
   User,
+  Address
 };
