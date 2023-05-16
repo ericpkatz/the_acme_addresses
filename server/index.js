@@ -1,3 +1,9 @@
+try {
+  require('../env');
+}
+catch(ex){
+  console.log(ex);
+}
 const app = require('./app');
 const { syncAndSeed } = require('./db');
 

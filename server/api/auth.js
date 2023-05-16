@@ -33,6 +33,18 @@ app.post('/addresses', isLoggedIn, async(req, res, next)=> {
   }
 });
 
+
+app.delete('/addresses/:id', isLoggedIn, async(req, res, next)=> {
+  try {
+    const address = await Address.findByPk(req.params.id);
+    await address.destroy();
+    res.sendStatus(204);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 app.get('/', isLoggedIn, (req, res, next)=> {
   try {
     res.send(req.user); 

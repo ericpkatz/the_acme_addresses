@@ -1,26 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, createAddress } from '../store';
-
-const AddressCreate = ({ createAddress })=> {
-  const input = useRef();
-  useEffect(()=> {
-    if(input.current){
-      const autocomplete = new google.maps.places.Autocomplete(input.current, {
-        fields: ["address_components", "geometry", "icon", "name", 'formatted_address']
-      });
-      autocomplete.addListener('place_changed', ()=> {
-        createAddress(autocomplete.getPlace());
-        input.current.value = '';
-      });
-    }
-  }, [input]);
-  return (
-    <div>
-      <input className='addressInput' ref={ input }/>
-    </div>
-  );
-};
+import { logout, createAddress, deleteAddress } from '../store';
+import MapComponent from './MapComponent';
+import AddressCreate from './AddressCreate';
 
 const Home = ()=> {
   const { auth } = useSelector(state => state);
@@ -42,11 +24,13 @@ const Home = ()=> {
               return (
                 <li key={ address.id} >
                   { address.data.formatted_address }
+                  <button onClick={ ()=> dispatch(deleteAddress(address))}>x</button>
                 </li>
               );
             })
           }
         </ul>
+        <MapComponent />
       </div>
     </div>
   );

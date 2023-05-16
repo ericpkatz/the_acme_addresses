@@ -38,6 +38,18 @@ export const createAddress = (data)=> {
   }
 };
 
+export const deleteAddress = (address)=> {
+  return async(dispatch)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.delete(`/api/auth/addresses/${address.id}`, {
+      headers: {
+        authorization: token
+      }
+    });
+    dispatch(loginWithToken());
+  }
+};
+
 
 export const attemptLogin = (credentials)=> {
   return async(dispatch)=> {
