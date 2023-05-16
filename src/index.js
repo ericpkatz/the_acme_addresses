@@ -8,7 +8,6 @@ import { HashRouter } from 'react-router-dom';
 const root = createRoot(document.querySelector('#root'));
 
 //want to make sure map api is loaded before proceeding
-window.makeSureMapIsLoaded = ()=> {
   root.render(
     <Provider store={ store }>
       <HashRouter>
@@ -16,4 +15,3 @@ window.makeSureMapIsLoaded = ()=> {
       </HashRouter>
     </Provider>
   );
-}
